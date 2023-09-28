@@ -1,0 +1,664 @@
+@use 'utilities' as u;
+
+*, *::after, *::before { 
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.6rem;
+}
+
+//NAV
+
+.burger-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1em;
+    border: 1px solid transparent;
+    background: none;
+    cursor: pointer;
+    z-index: 101;
+
+    &:focus {
+        outline: none;
+        border: 1px solid rgba(255,255,255, .5);
+        border-radius: 8px;
+    }
+
+    &:hover {
+        .burger-btn__bars::after, .burger-btn__bars::before {
+            width: 100%;
+        }
+    }
+
+    &__box {
+        position: relative;
+        width: 40px;
+        height: 30px;
+        padding: 3px;
+    }
+
+    &__bars, &__bars::after, &__bars::before {
+        @include u.burgerBtn;
+        
+    }
+
+    &__bars {
+        width: 100%;
+        &::after {
+            top: 13px;
+            width: 60%;
+        }
+    
+        &::before {
+            top: 27px;
+            width: 30%;
+            transition-delay: .1s;
+        }
+    }
+}
+
+//header
+
+.header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2em;
+    height: 75vh;
+    text-align: center;
+    color: u.$pure-white;
+    @include u.heroImages('../img/herosmall.jpg');
+    background-attachment: scroll;
+
+    &__heading {
+        font-family: 'Dancing Script', cursive;
+        font-size: 4.8rem;
+        font-weight: 300;
+    }
+
+    &__text {
+        font-size: 1.4rem;
+    }
+
+    &__btn {
+        position: relative;
+        margin-top: 2em;
+        padding: 0.8em 1.6em;
+        font-size: 1.4rem;
+        background: u.$pure-white;
+        border: none;
+        color: u.$dark;
+        border-radius: 8px;
+        text-decoration: none;
+        text-transform: uppercase;
+        cursor: pointer;
+        ;
+
+        &::before {
+            background-color: u.$light-white ;
+        }
+    }
+}
+
+//NAV
+.nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    background-image: u.$blue-gradient-solid;
+    z-index: 100;
+    transform: translateX(100%);
+    transition: transform .5s cubic-bezier(.65,.05,.36,.1);
+
+    &--active {
+        transform: translateX(0);
+    }
+
+    &__item {
+        position: relative;
+        display: block;
+        margin: 0.5em 0;
+        color: u.$pure-white;
+        padding: 0.5em 1.5em;
+        font-size: 2.8rem;
+        text-decoration: none;
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background-color: u.$pure-white;
+            transform: scaleY(0);
+            content: '';
+            transition: transform .3s;
+        }
+
+        &:hover::before {
+            transform: (scaleY(1));
+        }
+    }
+}
+
+.nav-items-animation {
+    animation: navItemsAnimation 1s both;
+}
+
+@keyframes navItemsAnimation {
+    from {
+        transform: translateX(200%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+
+// MAIN /////////////////////////////////
+
+//DREAMS SECTION 
+
+.dreams {
+    &__box {
+        display: flex;
+        flex-direction: column;
+        margin-top: 2em
+    }
+
+    &__img {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+
+    &__title {
+        margin-bottom: 0.5em;
+    }
+
+    &__text {
+        font-size: 1.4rem;
+    }
+
+}
+
+
+//HERO IMG 
+
+.hero-img {
+    position: relative;
+    padding: 10em 2em;
+    @include u.heroImages('../img/polynesia-3021072_640.jpg');
+    text-align: center;
+    overflow-X: hidden;
+    color: u.$pure-white;
+
+
+    &__title {
+        font-family: 'Dancing Script', cursive;
+        margin-bottom: 0.5em;
+        font-size: 4.8rem;
+    }
+
+}
+
+
+
+//ISLANDS
+
+.islands {
+    &__card {
+        position: relative;
+        margin: 1em 0;
+        height: 450px;
+        color: u.$pure-white;
+        text-align: center;
+        perspective: 1000px;
+
+        &:hover {
+            .islands__card-img {
+                transform: rotateY(-180deg);
+                opacity: 0;
+            }
+            .islands__card-info {
+                transform: rotateY(0);
+                opacity: 1;
+            }
+        }
+    }
+
+    &__card-info {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-image: u.$light-blue-gradient-solid;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 8px;
+        opacity: 0;
+        transform: rotateY(180deg);
+        transition: transform 1s, opacity 1s;
+        height: 100%;
+    }
+
+    &__card-info-title {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 1.2em;
+        font-family:  'Dancing Script', cursive;
+        font-size: 2.8rem;
+        width: 100%;
+    }
+
+    &__card-info-list {
+        margin: 0 auto;
+        width: 70%;
+        list-style: none;
+    }
+
+    &__card-info-list-item {
+        padding: 1em;
+        font-size: 1.4rem;
+        border-bottom: 1px solid u.$light-white;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &__card-info-btn {
+        padding: 1em;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 2em;
+        width: 80%;
+        background-color: u.$green-color;
+        cursor: pointer;
+        border: none;
+        border-radius: 8px;
+
+        &::before {
+            background-color: u.$green-color-hover;
+        }
+    }
+
+    &__card-img {
+        padding: 2em;
+        height: 100%;
+        border-radius: 8px;
+        background-size: cover;
+        transition: transform 1s, opacity, 1s;
+
+        &--first {
+            background-image: u.$light-blue-gradient, url('../img/boat-166738_640.jpg');
+
+        }
+        &--second {
+            background-image: u.$blue-gradient, url('../img/bora-bora-3023437_640.jpg');
+        }
+
+        &--third {
+            background-image: u.$purple-gradient, url('../img/hawaii-79928_640.jpg');
+        }
+    }
+
+    &__card-img-title {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 1.2em;
+        font-family:  'Dancing Script', cursive;
+        font-size: 2.8rem;
+        width: 100%;
+    }
+
+    &__card-img-info {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        font-size: 1.8rem;
+
+        i {
+            margin-right: 0.3em;
+        }
+    }
+}
+
+
+//OFFERS
+
+.offers {
+    position: relative;
+    @include u.heroImages('../img/maldives-3220702_640.jpg');
+    overflow-x: hidden;
+
+    &__option {
+        margin: 1em 0;
+        box-shadow: 5px 5px 10px rgba(46, 46, 46, 0.18);
+        background-color: u.$pure-white;
+        overflow: hidden;
+    }
+
+    &__option-img {
+        width: 100%;
+        transition: transform .3s;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &__option-info {
+        padding: 2em;
+        background-color: u.$pure-white;
+        z-index: 10;
+    }
+
+    &__option-heading {
+        margin-bottom: 0.5em;
+        font-size: 2.4rem;
+        font-weight: 300;
+    }
+
+    &__option-text {
+        margin-bottom: 0.5em;
+        font-size: 1.3rem;
+        color: u.$dark
+    }
+
+    &__option-btn {
+        position: relative;
+        margin-top: 1em;
+        padding: 0.8em;
+        width: 100%;
+        color: u.$pure-white;
+        border: none;
+        border-radius: 8px;
+        background-color: u.$main-color;
+        cursor: pointer;
+
+        &::before {
+            background-color: u.$secondary-color;
+        }
+    }
+}
+
+// REVIEVS 
+.revievs {
+    &__box {
+        position: relative;
+        margin: 2em;
+        padding: 2em;
+        border-radius: 8px;
+        box-shadow: 3px 3px 10px rgba(46, 46, 46, 0.18);
+        transition: transform .3s;
+
+        &:hover {
+            transform: scale(0.95);
+        }
+    }
+
+    &__box-img {
+        position: absolute;
+        top: 8%;
+        left: 75%;
+        transform: translate(-50%, -50%);
+
+        img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+
+    &__box-quote {
+        margin-bottom: 1em;
+        font-size: 3rem;
+        color: u.$main-color;
+    }
+
+    &__box-text {
+        margin-bottom: 1em;
+        font-size: 1.4rem;
+        color: u.$dark;
+    }
+}
+
+//===========================================
+//MEDIA
+//===========================================
+
+@media(max-width: 767px) {
+    .revievs.section-padding {
+        padding: 6em 0;
+    }
+}
+
+@media(min-width: 576px) {
+
+    .dreams {      
+        &__box {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        &__box-text {
+            width: 55%;
+
+            &--right {
+                text-align: right;
+            }
+        }
+
+        &__box-img{
+            width: 40%;
+
+            &--right {
+                order: 1;
+            }
+        }
+         
+        &__img {
+            margin-bottom: 0;
+            max-height: 300px;
+        }
+
+    }
+
+}
+
+@media (min-width: 768px) {
+    .white-block {
+        height: 50px;
+        width: 45%;
+    }
+
+    .header {
+        &__heading {
+            font-size: 6.6rem;
+        }
+
+        &__text {
+            font-size: 2.2rem;
+        }
+
+        &__btn {
+            font-size: 1.6rem;
+        }
+    }
+
+    .dreams {
+        &__text {
+            font-size: 1.8rem;
+        }
+    }
+
+    .hero-img {
+        padding: 30rem 2em;
+        
+        hr {
+            margin: 0 auto;
+            width: 70%;
+        }
+
+        &__text {
+            font-size: 2.2rem;
+        }
+    }
+
+    .islands {
+        &__cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        &__card {
+            margin: 1em;
+            width: 45%;
+        }
+    }
+
+    .offers {
+        &__option {
+            display: flex;
+            margin: 2em 0;
+            width: 100%;
+        }
+
+        &__option-img {
+            width: 50%;
+            height: auto;
+
+            &--right {
+                order: 1
+            }
+        }
+
+        &__option-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+        }
+
+        &__option-heading {
+            margin-bottom: 0.5em;
+            font-size: 3.6rem;
+        }
+
+        &__option-btn {
+            padding: 1em;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .burger-btn {
+        top: 50px;
+        right: 50px;
+    }
+
+    .header {
+        background-image: u.$blue-gradient url("../img/herobig.jpg");
+
+        &__heading {
+            font-size: 10rem;
+        }
+    }
+
+    .nav {
+        &__item {
+            font-size: 4.8rem;
+        }
+    }
+
+    .dreams {
+        &__box {
+            margin: 5em 0;
+        }
+        
+        &__box-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            margin-bottom: 2.5em;
+        }
+
+        &__title {
+            font-size: 3.6rem;
+        }
+
+        &__text {
+            font-size: 2.2rem;
+        }
+    }
+
+    .hero-img {
+        padding: 40rem 2em;
+        background-image: u.$blue-gradient url('..img/polynesia-3021072_1920.jpg');
+
+        &__title {
+            font-size: 7.2rem;
+        }
+    
+        hr {
+            width: 60%;
+            max-width: 900px;
+        }
+    }
+
+    .offers {
+        background-image: u.$blue-gradient url('../img/maldives-3220702_1920.jpg');
+
+        &__option-img {
+            object-fit: cover;
+            height: 300px;
+        }
+
+        &__option-text {
+            font-size: 1.5rem;
+        }
+
+        &__option-btn {
+            width: 60%;
+        }
+    }
+}
+
+@media (min-width: 1100px) {
+    .islands {
+        &__card {
+            width: 30%;
+        }
+    }
+}
+
+
+
+
+
