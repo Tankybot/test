@@ -63,10 +63,12 @@
         <section class="hero-img section">
             <div class="white-block white-block-left"></div>
             <div class="white-block white-block-right"></div>
-            <p class="hero-img__title">Tropical Paradise</p>
-            <hr>
-            <p class="hero-img__text">One of a kind place on Earth</p>
-            <hr>
+            <div class="hero-img__img-box">
+                <p class="hero-img__title">Tropical Paradise</p>
+                <hr>
+                <p class="hero-img__text">One of a kind place on Earth</p>
+                <hr>
+            </div>
         </section>
 
         <section class="islands section-padding section white-section" id="islands">
@@ -204,6 +206,30 @@
                         <strong>Alina Key</strong>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="contact section-padding section white-section" id="contact">
+            
+            <div class="white-block white-block--left"></div>
+            <div class="white-block white-block--right"></div>
+
+            <h2 class="section-heading">Contact</h2>
+
+            <div class="wrapper">
+                <form class="contact__form">
+
+                    <label for="name" class="contact__form-label">First and last name</label>
+                    <input type="text" class="contact__form-input" id="name">
+
+                    <label for="email" class="contact__form-label">Email</label>
+                    <input type="email" class="contact__form-input" id="email">
+
+                    <label for="msg" class="contact__form-label">Messege</label>
+                    <textarea name="" id="msg" class="contact__form-textarea"></textarea>
+
+                    <button class="contact__form-button btn-special-animation" type="submit">Send</button>
+                </form>
             </div>
         </section>
     </main>

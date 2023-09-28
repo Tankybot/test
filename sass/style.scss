@@ -206,7 +206,7 @@ body {
     padding: 10em 2em;
     @include u.heroImages('../img/polynesia-3021072_640.jpg');
     text-align: center;
-    overflow-X: hidden;
+    overflow: hidden;
     color: u.$pure-white;
 
 
@@ -446,6 +446,13 @@ body {
     }
 }
 
+
+//CONTACT
+.contact {
+    position: relative;
+    background-color: u.$light-white;
+    overflow: hidden;
+}
 //===========================================
 //MEDIA
 //===========================================

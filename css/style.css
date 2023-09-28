@@ -257,7 +257,7 @@ body {
   background-position: center;
   background-attachment: fixed;
   text-align: center;
-  overflow-X: hidden;
+  overflow: hidden;
   color: #fff;
 }
 .hero-img__title {
@@ -454,6 +454,12 @@ body {
   margin-bottom: 1em;
   font-size: 1.4rem;
   color: #2e2e2e;
+}
+
+.contact {
+  position: relative;
+  background-color: #eee;
+  overflow: hidden;
 }
 
 @media (max-width: 767px) {
