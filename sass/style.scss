@@ -203,6 +203,7 @@ body {
 
 .hero-img {
     position: relative;
+    top: 0;
     padding: 10em 2em;
     @include u.heroImages('../img/polynesia-3021072_640.jpg');
     text-align: center;
